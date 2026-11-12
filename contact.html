@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <title>Contact | St. Teresa Kanyange Academy</title>
+  <meta name="description" content="Contact St. Teresa Kanyange Academy. We'd love to hear from you.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <span><i class="fas fa-phone"></i> +254 700 131515</span>
+        <span><i class="fas fa-envelope"></i> saintlykids@gmail.com</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="admin/login.html">Student Portal</a>
+        <a href="contact.html">Careers</a>
+        <a href="contact.html">Give</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <div class="brand-crest">ST</div>
+        <div class="brand-text">
+          <h1>St. Teresa Kanyange Academy</h1>
+          <span>Unity is Strength</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="admissions.html" class="btn-apply">Apply Now</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="nav-overlay"></div>
+
+  <section class="page-hero">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p class="breadcrumb"><a href="index.html">Home</a><span>/</span>Contact</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">We'd Love to Hear From You</span>
+        <h2>Get In Touch</h2>
+        <p>Whether you have questions about admissions, want to schedule a tour, or just want to say hello, our team is here for you.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-info-item reveal">
+            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h3>Visit Our Campus</h3>
+              <p>St. Teresa Kanyange Academy<br>Othaya Town, Nyeri County, Kenya</p>
+            </div>
+          </div>
+          <div class="contact-info-item reveal">
+            <div class="icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <h3>Call the Office</h3>
+              <p>+254 700 131515<br>Monday–Friday, 8:00 AM – 4:00 PM</p>
+            </div>
+          </div>
+          <div class="contact-info-item reveal">
+            <div class="icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h3>Email Us</h3>
+              <p>saintlykids@gmail.com<br>We reply within one school day</p>
+            </div>
+          </div>
+          <div class="contact-info-item reveal">
+            <div class="icon"><i class="fas fa-praying-hands"></i></div>
+            <div>
+              <h3>Mass Schedule</h3>
+              <p>Sunday: 9:00 AM &amp; 11:00 AM<br>Weekdays: 8:00 AM (School Mass)</p>
+            </div>
+          </div>
+          <div class="contact-info-item reveal">
+            <div class="icon"><i class="fas fa-bus"></i></div>
+            <div>
+              <h3>Transportation</h3>
+              <p>Bus service available from surrounding towns. Contact the office for routes and pricing.</p>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form reveal" id="contactForm">
+          <h3 style="margin-bottom:20px;color:var(--navy);font-size:1.3rem">Send Us a Message</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+254 700 131515">
+            </div>
+            <div class="form-group">
+              <label for="interest">Inquiry Type</label>
+              <select id="interest" name="interest">
+                <option value="">Select an option</option>
+                <option value="admissions">Admissions</option>
+                <option value="tour">Campus Tour</option>
+                <option value="financial-aid">Financial Aid</option>
+                <option value="careers">Employment</option>
+                <option value="general">General Inquiry</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Find Us</span>
+        <h2>Our Location</h2>
+        <p>Located in Othaya Town, Nyeri County, our campus is easily accessible from the Nyeri–Othaya road and the nearby Othaya town centre.</p>
+      </div>
+      <div class="map-card reveal">
+        <div class="map-frame">
+          <!-- Keyless Google Maps embed: real, interactive, zoomable and clickable. -->
+          <div class="map-skeleton" id="mapSkeleton">
+            <i class="fas fa-circle-notch fa-spin"></i>
+            <span>Loading map…</span>
+          </div>
+          <iframe
+            id="campusMap"
+            title="Map showing the location of St. Teresa Kanyange Academy, Othaya Town, Nyeri County, Kenya"
+            src="https://maps.google.com/maps?q=St%20Teresa%20Kanyange%20Academy%2C%20Othaya%2C%20Nyeri%20County%2C%20Kenya&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+        <div class="map-bar">
+          <div class="map-bar-info">
+            <i class="fas fa-location-dot" aria-hidden="true"></i>
+            <div>
+              <strong>St. Teresa Kanyange Academy</strong>
+              <span>Othaya Town, Nyeri County, Kenya</span>
+            </div>
+          </div>
+          <div class="map-bar-actions">
+            <a class="btn btn-primary btn-sm"
+               href="https://www.google.com/maps/dir/?api=1&amp;destination=St%20Teresa%20Kanyange%20Academy%2C%20Othaya%2C%20Nyeri%20County%2C%20Kenya&amp;travelmode=driving"
+               target="_blank" rel="noopener">
+              <i class="fas fa-diamond-turn-right"></i> Get Directions
+            </a>
+            <a class="btn btn-outline btn-sm"
+               href="https://www.google.com/maps/search/?api=1&amp;query=St%20Teresa%20Kanyange%20Academy%2C%20Othaya%2C%20Nyeri%20County%2C%20Kenya"
+               target="_blank" rel="noopener">
+              <i class="fas fa-up-right-from-square"></i> Open in Maps
+            </a>
+          </div>
+        </div>
+        <p class="map-note">
+          <i class="fas fa-circle-info" aria-hidden="true"></i>
+          St. Teresa Kanyange Academy is in Othaya Town, Nyeri County, along the Nyeri–Othaya road.
+          Free visitor parking is beside the main gate; the Othaya town centre is a short walk from campus.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-crest">ST</div>
+            <div class="brand-text">
+              <h1 style="color:#fff;font-size:1.2rem">St. Teresa Kanyange Academy</h1>
+              <span>Unity is Strength</span>
+            </div>
+          </div>
+          <p>Nurturing young minds and inspiring hearts since 1962. A Catholic college-preparatory school serving Pre-K through Grade 12.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="admissions.html">Admissions</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul class="footer-links">
+            <li><a href="admin/login.html">Student Portal</a></li>
+            <li><a href="academics.html">Student Handbook</a></li>
+            <li><a href="academics.html">Course Catalog</a></li>
+            <li><a href="contact.html">Careers</a></li>
+            <li><a href="contact.html">Give to St. Teresa</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Info</h4>
+          <div class="footer-contact">
+            <p><i class="fas fa-map-marker-alt"></i> Othaya Town, Nyeri County, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 700 131515</p>
+            <p><i class="fas fa-envelope"></i> saintlykids@gmail.com</p>
+            <p><i class="fas fa-clock"></i> Office: Mon–Fri, 8:00 AM – 4:00 PM</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 St. Teresa Academy. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+        <p class="powered-by">Powered by <span class="pby-dot">&#9670;</span> <a class="pby-brand" href="https://shopixhubsolution.co.ke" target="_blank" rel="noopener" title="Visit SHOPIX HUB SOLUTION website"><strong>SHOPIX HUB SOLUTION</strong></a><br><span class="pby-sub">Website Design &amp; Development &mdash; <a href="tel:+254703626702">Contacts 0703626702</a></span></p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="js/persist.js"></script>
+<script src="js/upload.js"></script>
+  <script src="js/images.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    /* Dismiss the loading placeholder as soon as the embedded map reports in.
+       If the map cannot load (offline / blocked), the address bar and both
+       action buttons below it stay fully usable. */
+    (function () {
+      var skel = document.getElementById('mapSkeleton');
+      var map = document.getElementById('campusMap');
+      if (!skel || !map) return;
+      var hide = function () { skel.classList.add('hidden'); };
+      map.addEventListener('load', hide);
+      map.addEventListener('error', hide);
+      setTimeout(hide, 8000);
+    })();
+  </script>
+</body>
+</html>
