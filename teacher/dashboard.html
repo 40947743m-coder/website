@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Teacher Portal | St. Teresa Academy</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body data-page="teacher">
+<div class="admin-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-mini">
+        <div class="crest-mini">STK</div>
+        <div>
+          <h2>St. Teresa Kanyange Academy</h2>
+          <span>Teacher Portal</span>
+        </div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-label">Main</div>
+      <a href="#" data-section="dashboard" data-title="Dashboard" class="active"><i class="fas fa-gauge-high"></i> Dashboard</a>
+      <div class="nav-label">Academics</div>
+      <a href="#" data-section="create-exam" data-title="Create Exam"><i class="fas fa-file-circle-plus"></i> Create Exam</a>
+      <a href="#" data-section="my-exams" data-title="My Exams"><i class="fas fa-file-lines"></i> My Exams</a>
+      <a href="#" data-section="marking" data-title="Exam Marking"><i class="fas fa-pen-ruler"></i> Exam Marking <span class="badge badge-danger" id="tcMarkingBadge" style="display:none;margin-left:4px"></span></a>
+      <a href="#" data-section="homework" data-title="Homework"><i class="fas fa-book-open"></i> Homework</a>
+      <a href="#" data-section="materials" data-title="Learning Materials"><i class="fas fa-folder-open"></i> Materials</a>
+      <a href="#" data-section="timetable" data-title="My Timetable"><i class="fas fa-calendar-days"></i> My Timetable</a>
+      <div class="nav-label">Approvals</div>
+      <a href="#" data-section="submit-doc" data-title="Submit for Approval"><i class="fas fa-paper-plane"></i> Submit for Approval</a>
+      <a href="#" data-section="my-submissions" data-title="My Submissions"><i class="fas fa-folder-open"></i> My Submissions <span class="badge badge-danger" id="badge-mysubs" style="display:none;margin-left:4px"></span></a>
+      <div class="nav-label">Class</div>
+      <a href="#" data-section="students" data-title="My Students"><i class="fas fa-user-graduate"></i> My Students</a>
+      <a href="#" data-section="attendance" data-title="Attendance"><i class="fas fa-clipboard-check"></i> Attendance</a>
+      <a href="#" data-section="class-performance" data-title="Class Performance"><i class="fas fa-chart-line"></i> Class Performance</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../index.html"><i class="fas fa-globe"></i> View Website</a>
+      <a href="../admin/login.html"><i class="fas fa-right-from-bracket"></i> Logout</a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+        <h1 id="topbarTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="user-chip" id="userChip"></div>
+        <button class="logout-btn" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </header>
+
+    <div class="page-body">
+
+      <!-- DASHBOARD -->
+      <section class="page-section active" id="sec-dashboard">
+        <div class="section-head">
+          <div>
+            <h2>Welcome back, <span id="tcName">Teacher</span></h2>
+            <p>Subject: <strong id="tcSubject">—</strong></p>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="s-icon navy"><i class="fas fa-file-lines"></i></div>
+            <div class="s-info"><div class="s-num" id="tcExamCount">0</div><div class="s-label">Exams Published</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="s-icon gold"><i class="fas fa-user-graduate"></i></div>
+            <div class="s-info"><div class="s-num" id="tcStudentCount">0</div><div class="s-label">Students Enrolled</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="s-icon green"><i class="fas fa-pen-to-square"></i></div>
+            <div class="s-info"><div class="s-num" id="tcGradedCount">0</div><div class="s-label">Exam Attempts</div></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Quick Actions</h3></div>
+          <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="#" class="btn btn-primary" data-goto="create-exam" onclick="event.preventDefault();document.querySelector('[data-section=create-exam]').click()"><i class="fas fa-plus"></i> Create New Exam</a>
+            <a href="#" class="btn btn-gold" data-goto="my-exams" onclick="event.preventDefault();document.querySelector('[data-section=my-exams]').click()"><i class="fas fa-eye"></i> View My Exams</a>
+            <a href="#" class="btn btn-outline" data-goto="marking" onclick="event.preventDefault();document.querySelector('[data-section=marking]').click()"><i class="fas fa-pen-ruler"></i> Mark Student Exams</a>
+            <a href="#" class="btn btn-outline" data-goto="timetable" onclick="event.preventDefault();document.querySelector('[data-section=timetable]').click()"><i class="fas fa-calendar"></i> View Timetable</a>
+          </div>
+        </div>
+        <div id="tcClassTeacherPanel"></div>
+        <div id="tcDashPerfPanel"></div>
+      </section>
+
+      <!-- CREATE EXAM -->
+      <section class="page-section" id="sec-create-exam">
+        <div class="section-head">
+          <div>
+            <h2>Create &amp; Publish Exam</h2>
+            <p>Build an exam with auto-marked multiple-choice questions and/or teacher-marked written questions, then publish it to the student portal. Total marks are calculated from the questions.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body">
+            <form id="examForm">
+              <div class="form-grid" style="margin-bottom:22px">
+                <div class="form-group full">
+                  <label>Exam Title <span class="req">*</span></label>
+                  <input type="text" id="examTitle" placeholder="e.g., Algebra II — Midterm Examination" required>
+                </div>
+                <div class="form-group">
+                  <label>Subject <span class="req">*</span></label>
+                  <select id="examSubject" required></select>
+                </div>
+                <div class="form-group">
+                  <label>Grade <span class="req">*</span></label>
+                  <select id="examGrade" required></select>
+                </div>
+                <div class="form-group">
+                  <label>Exam Date</label>
+                  <input type="date" id="examDate">
+                </div>
+                <div class="form-group">
+                  <label>Duration (minutes)</label>
+                  <input type="number" id="examDuration" value="60" min="5">
+                </div>
+                <div class="form-group">
+                  <label>Total Marks (auto-calculated)</label>
+                  <input type="number" id="examMarks" value="10" min="1" disabled title="Total marks are calculated from the marks of each question">
+                </div>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+                <h3 style="color:var(--navy);font-size:1.05rem"><i class="fas fa-list-ol"></i> Questions</h3>
+                <button type="button" class="btn btn-gold" id="addQuestionBtn"><i class="fas fa-plus"></i> Add Question</button>
+              </div>
+
+              <div id="questionsContainer"></div>
+
+              <div class="form-actions" style="margin-top:24px">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Publish Exam to Student Portal</button>
+                <button type="reset" class="btn btn-outline" onclick="document.getElementById('questionsContainer').innerHTML=''"><i class="fas fa-rotate-left"></i> Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY EXAMS -->
+      <section class="page-section" id="sec-my-exams">
+        <div class="section-head">
+          <div>
+            <h2>My Exams</h2>
+            <p>All exams you have published to the student portal.</p>
+          </div>
+        </div>
+        <div class="exam-card-list" id="myExamsList"></div>
+      </section>
+
+      <!-- EXAM MARKING -->
+      <section class="page-section" id="sec-marking">
+        <div class="section-head">
+          <div>
+            <h2>Exam Marking Centre</h2>
+            <p>Student submissions for your exams. Auto-marked questions arrive with their marks; written questions and questions without an answer key need your marks.</p>
+          </div>
+          <button class="btn btn-outline" onclick="renderTeacherMarkingCentre()"><i class="fas fa-rotate"></i> Refresh</button>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="s-icon navy"><i class="fas fa-file-lines"></i></div>
+            <div class="s-info"><div class="s-num" id="tcMkExams">0</div><div class="s-label">Exams Created</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="s-icon blue"><i class="fas fa-users"></i></div>
+            <div class="s-info"><div class="s-num" id="tcMkSubmissions">0</div><div class="s-label">Student Submissions</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="s-icon gold"><i class="fas fa-hourglass-half"></i></div>
+            <div class="s-info"><div class="s-num" id="tcMkPending">0</div><div class="s-label">Pending Marking</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="s-icon green"><i class="fas fa-pen-ruler"></i></div>
+            <div class="s-info"><div class="s-num" id="tcMkInProgress">0</div><div class="s-label">Marking in Progress</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="s-icon red"><i class="fas fa-stamp"></i></div>
+            <div class="s-info"><div class="s-num" id="tcMkAwaiting">0</div><div class="s-label">Marks Awaiting Approval</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="s-icon green"><i class="fas fa-star"></i></div>
+            <div class="s-info"><div class="s-num" id="tcMkPublished">0</div><div class="s-label">Published Results</div></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+          <select id="tcMkClass" style="padding:8px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit"><option value="">All classes</option></select>
+          <select id="tcMkSubject" style="padding:8px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit"><option value="">All subjects</option></select>
+          <select id="tcMkExam" style="padding:8px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit"><option value="">All exams</option></select>
+          <select id="tcMkStatus" style="padding:8px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit"><option value="">All statuses</option></select>
+          <input type="date" id="tcMkDate" style="padding:8px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit" title="Filter by submission date">
+        </div>
+        <div class="panel">
+          <div class="panel-body table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Class</th><th>Exam</th><th>Subject</th><th>Submitted</th><th>Marks</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="tcMarkingBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOMEWORK -->
+      <section class="page-section" id="sec-homework">
+        <div class="section-head">
+          <div>
+            <h2>Homework</h2>
+            <p>Create and manage homework for your classes. Only published homework appears in student portals.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openAddHomework()"><i class="fas fa-plus"></i> Add Homework</button>
+        </div>
+        <div class="panel">
+          <div class="panel-body table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Title</th><th>Class</th><th>Subject</th><th>Deadline</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="tcHomeworkBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- MATERIALS -->
+      <section class="page-section" id="sec-materials">
+        <div class="section-head">
+          <div>
+            <h2>Learning Materials</h2>
+            <p>Upload notes, worksheets, and revision materials for your classes.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openUploadMaterial()"><i class="fas fa-upload"></i> Upload Material</button>
+        </div>
+        <div class="panel">
+          <div class="panel-body table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Title</th><th>Class</th><th>Subject</th><th>Category</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="tcMaterialsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ATTENDANCE -->
+      <section class="page-section" id="sec-attendance">
+        <div class="section-head">
+          <div>
+            <h2>Attendance</h2>
+            <p>Mark attendance for your assigned class. Students and parents are notified of absences. Duplicate registers for the same class and date are automatically prevented.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <select id="tcAttClass" onchange="loadAttendanceRegister()" style="padding:9px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit"></select>
+            <input type="date" id="tcAttDate" style="padding:9px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit">
+            <button class="btn btn-primary" onclick="loadAttendanceRegister()"><i class="fas fa-rotate"></i> Load</button>
+          </div>
+        </div>
+        <div class="stats-row" id="tcAttSummaryRow"></div>
+        <div class="panel">
+          <div class="panel-head"><h3>Register</h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <small id="tcAttStatus" style="color:var(--text-light)"></small>
+              <button class="btn btn-sm btn-outline" onclick="markAllPresent()"><i class="fas fa-check-double"></i> Mark All Present</button>
+            </div>
+          </div>
+          <div class="panel-body table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Adm. No</th><th>Student</th><th>Status</th><th>Arrival Time</th><th>Remarks</th></tr></thead>
+              <tbody id="tcAttBody"><tr><td colspan="5" style="text-align:center;padding:28px;color:var(--text-light)">Select a class and date, then click Load</td></tr></tbody>
+            </table>
+          </div>
+          <div class="panel-body" style="border-top:1px solid var(--border)">
+            <button class="btn btn-primary" onclick="saveAttendanceRegister()"><i class="fas fa-save"></i> Save &amp; Submit Register</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3><i class="fas fa-chart-simple" style="color:var(--gold)"></i> Attendance Reports</h3>
+            <select id="tcAttPeriod" onchange="renderTeacherAttendanceReport()" style="padding:7px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+          <div class="panel-body" id="tcAttReport"></div>
+        </div>
+      </section>
+
+      <!-- CLASS PERFORMANCE -->
+      <section class="page-section" id="sec-class-performance">
+        <div class="section-head">
+          <div>
+            <h2>Class Performance</h2>
+            <p>Automatic performance monitoring for your class, based only on finalized (published) examination results.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <select id="cpClass" onchange="renderClassPerformance()" style="padding:9px 12px;border:2px solid var(--border);border-radius:8px;font-family:inherit"></select>
+            <button class="btn btn-outline" onclick="renderClassPerformance()"><i class="fas fa-rotate"></i> Refresh</button>
+            <button class="btn btn-outline" onclick="printClassPerformance()"><i class="fas fa-print"></i> Print</button>
+          </div>
+        </div>
+        <div class="stats-row" id="cpSummary"></div>
+        <div id="cpFeedback"></div>
+        <div class="panel">
+          <div class="panel-head"><h3>Subject Breakdown</h3></div>
+          <div class="panel-body table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Subject</th><th>Latest Exam</th><th>Average</th><th>Previous</th><th>Change</th><th>Pass Rate</th><th>Passed</th><th>Failed</th><th>Trend</th></tr></thead>
+              <tbody id="cpSubjects"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Examinations Compared</h3></div>
+          <div class="panel-body table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Examination</th><th>Subject</th><th>Date</th><th>Average</th><th>Pass Rate</th><th>Results</th></tr></thead>
+              <tbody id="cpExams"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIMETABLE -->
+      <section class="page-section" id="sec-timetable">
+        <div class="section-head">
+          <div>
+            <h2>My Timetable</h2>
+            <p>Your weekly teaching schedule assigned by the admin.</p>
+          </div>
+        </div>
+        <div class="panel"><div class="panel-body"><div id="tcTimetable"></div></div></div>
+      </section>
+
+      <!-- SUBMIT FOR APPROVAL -->
+      <section class="page-section" id="sec-submit-doc">
+        <div class="section-head">
+          <div>
+            <h2>Submit for Approval</h2>
+            <p>Send examination papers, marking schemes, marks, results, lesson notes and other documents through the approval chain: <strong>Chief Examiner → Headteacher → Secretary → Published</strong>.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body">
+            <form id="subForm">
+              <input type="hidden" id="subEditId" value="">
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label>Document Title <span class="req">*</span></label>
+                  <input type="text" id="subTitle" required placeholder="e.g. Grade 6 Mathematics End of Term Paper 2">
+                </div>
+                <div class="form-group">
+                  <label>Document Type <span class="req">*</span></label>
+                  <select id="subType" required></select>
+                </div>
+                <div class="form-group">
+                  <label>Class <span class="req">*</span></label>
+                  <select id="subClass" required><option value="">Select class…</option></select>
+                </div>
+                <div class="form-group">
+                  <label>Subject <span class="req">*</span></label>
+                  <select id="subSubject" required></select>
+                </div>
+                <div class="form-group">
+                  <label>Term</label>
+                  <select id="subTerm"><option value="1">Term 1</option><option value="2">Term 2</option><option value="3">Term 3</option></select>
+                </div>
+                <div class="form-group">
+                  <label>Academic Year</label>
+                  <input type="text" id="subYear" readonly style="background:var(--cream)">
+                </div>
+                <div class="form-group full">
+                  <label>Content / Remarks</label>
+                  <textarea id="subContent" rows="5" placeholder="Summary of the document, key instructions for reviewers, question count, total marks…"></textarea>
+                </div>
+                <div class="form-group full">
+                  <label>Attachment (optional — PDF, DOC, XLS, PPT, TXT, CSV, image — max 8MB)</label>
+                  <input type="file" id="subFile" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.jpg,.jpeg,.png,.webp">
+                  <small id="subFileInfo" style="display:block;margin-top:4px;font-size:.78rem;color:var(--text-light)"></small>
+                </div>
+              </div>
+              <div style="background:var(--info-bg);color:var(--info);padding:12px 14px;border-radius:8px;font-size:.87rem;margin:16px 0 0">
+                <i class="fas fa-circle-info"></i> Once submitted, the document receives a tracking number and cannot be edited unless a reviewer returns it for correction.
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit for Approval</button>
+                <button type="reset" class="btn btn-outline" onclick="document.getElementById('subEditId').value='';document.getElementById('subFileInfo').textContent=''"><i class="fas fa-rotate-left"></i> Clear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY SUBMISSIONS -->
+      <section class="page-section" id="sec-my-submissions">
+        <div class="section-head">
+          <div>
+            <h2>My Submissions</h2>
+            <p>Track every document you have sent for approval and see what happens next.</p>
+          </div>
+          <button class="btn btn-outline" onclick="renderMySubmissions()"><i class="fas fa-rotate"></i> Refresh</button>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card"><div class="s-icon navy"><i class="fas fa-files"></i></div><div class="s-info"><div class="s-num" id="subStatTotal">0</div><div class="s-label">Total Submitted</div></div></div>
+          <div class="stat-card"><div class="s-icon gold"><i class="fas fa-hourglass-half"></i></div><div class="s-info"><div class="s-num" id="subStatPending">0</div><div class="s-label">Awaiting Approval</div></div></div>
+          <div class="stat-card"><div class="s-icon red"><i class="fas fa-rotate-left"></i></div><div class="s-info"><div class="s-num" id="subStatRejected">0</div><div class="s-label">Returned for Correction</div></div></div>
+          <div class="stat-card"><div class="s-icon green"><i class="fas fa-bullhorn"></i></div><div class="s-info"><div class="s-num" id="subStatPublished">0</div><div class="s-label">Published</div></div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-body" id="subMineBody"></div>
+        </div>
+      </section>
+
+      <!-- STUDENTS -->
+      <section class="page-section" id="sec-students">
+        <div class="section-head">
+          <div>
+            <h2>My Students</h2>
+            <p>Students currently enrolled at the academy.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Grade</th><th>Email</th><th>Status</th></tr></thead>
+              <tbody id="tcStudentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- PREVIEW EXAM MODAL -->
+<div class="modal-overlay" id="previewExamModal">
+  <div class="modal modal-lg">
+    <div class="modal-head"><h3>Exam Preview</h3><button class="modal-close" onclick="closeModal('previewExamModal')">&times;</button></div>
+    <div class="modal-body" id="previewExamBody" style="max-height:70vh;overflow-y:auto"></div>
+  </div>
+</div>
+
+<!-- MARK SUBMISSION MODAL -->
+<div class="modal-overlay" id="markSubmissionModal">
+  <div class="modal modal-lg">
+    <div class="modal-head"><h3>Mark Student Submission</h3><button class="modal-close" onclick="closeModal('markSubmissionModal')">&times;</button></div>
+    <div class="modal-body" id="markSubmissionBody" style="max-height:75vh;overflow-y:auto"></div>
+  </div>
+</div>
+
+<!-- HOMEWORK MODAL -->
+<div class="modal-overlay" id="homeworkModal">
+  <div class="modal">
+    <div class="modal-head"><h3 id="homeworkModalTitle">Add Homework</h3><button class="modal-close" onclick="closeModal('homeworkModal')">&times;</button></div>
+    <div class="modal-body">
+      <form id="homeworkForm">
+        <input type="hidden" id="hwEditId">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Title <span class="req">*</span></label>
+            <input type="text" id="hwTitle" required placeholder="e.g., Fractions Worksheet 3">
+          </div>
+          <div class="form-group full">
+            <label>Class(es) <span class="req">*</span></label>
+            <div id="hwClassChecks" style="display:flex;flex-wrap:wrap;gap:8px;padding:8px 0"></div>
+            <small style="color:var(--text-light);font-size:0.78rem">Tick every class that should receive this homework. Students in the selected classes will see it once published.</small>
+          </div>
+          <div class="form-group">
+            <label>Subject <span class="req">*</span></label>
+            <select id="hwSubject" required></select>
+          </div>
+          <div class="form-group">
+            <label>Date Assigned <span class="req">*</span></label>
+            <input type="date" id="hwDateAssigned" required>
+          </div>
+          <div class="form-group">
+            <label>Submission Deadline</label>
+            <input type="date" id="hwDeadline">
+          </div>
+          <div class="form-group">
+            <label>Submission Method</label>
+            <select id="hwMethod"><option value="in-class">In class</option><option value="online">Online submission</option></select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="hwStatus"><option value="published">Published</option><option value="draft">Draft</option></select>
+          </div>
+          <div class="form-group full">
+            <label>Instructions</label>
+            <textarea id="hwInstructions" rows="3" placeholder="What should students do?"></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Attachment (optional)</label>
+            <input type="file" id="hwFile" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg">
+            <small id="hwFileInfo" style="display:block;margin-top:4px;font-size:0.78rem;color:var(--text-light)"></small>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Homework</button>
+          <button type="button" class="btn btn-outline" onclick="closeModal('homeworkModal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- UPLOAD MATERIAL MODAL -->
+<div class="modal-overlay" id="materialModal">
+  <div class="modal">
+    <div class="modal-head"><h3>Upload Learning Material</h3><button class="modal-close" onclick="closeModal('materialModal')">&times;</button></div>
+    <div class="modal-body">
+      <form id="materialForm">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Document Title <span class="req">*</span></label>
+            <input type="text" id="matTitle" required placeholder="e.g., Grade 5 Mathematics Notes — Fractions">
+          </div>
+          <div class="form-group">
+            <label>Class <span class="req">*</span></label>
+            <select id="matClass" required></select>
+          </div>
+          <div class="form-group">
+            <label>Subject <span class="req">*</span></label>
+            <select id="matSubject" required></select>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="matCategory">
+              <option value="notes">Class Notes</option>
+              <option value="worksheet">Worksheet</option>
+              <option value="revision">Revision Material</option>
+              <option value="study-guide">Study Guide</option>
+              <option value="assignment">Assignment</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="matStatus"><option value="published">Published</option><option value="draft">Draft</option></select>
+          </div>
+          <div class="form-group full">
+            <label>Description / Instructions</label>
+            <textarea id="matDescription" rows="2"></textarea>
+          </div>
+          <div class="form-group full">
+            <label>File <span class="req">*</span> (PDF, DOC, DOCX, TXT, image — max 8MB)</label>
+            <input type="file" id="matFile" accept=".pdf,.doc,.docx,.txt,.rtf,.png,.jpg,.jpeg" required>
+            <small id="matFileInfo" style="display:block;margin-top:4px;font-size:0.78rem;color:var(--text-light)"></small>
+          </div>
+          <div class="form-group">
+            <label>Available Until (optional expiry)</label>
+            <input type="date" id="matExpiry">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
+          <button type="button" class="btn btn-outline" onclick="closeModal('materialModal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MATERIAL VIEW MODAL (shared) -->
+<div class="modal-overlay" id="materialViewModal">
+  <div class="modal modal-lg">
+    <div class="modal-head"><h3>Document</h3><button class="modal-close" onclick="closeModal('materialViewModal')">&times;</button></div>
+    <div class="modal-body" id="materialViewBody" style="max-height:75vh;overflow-y:auto"></div>
+  </div>
+</div>
+
+<!-- DOCUMENT PREVIEW / APPROVAL MODAL -->
+<div class="modal-overlay" id="approvalPreviewModal">
+  <div class="modal modal-lg">
+    <div class="modal-head"><h3 id="approvalPreviewTitle">Document</h3><button class="modal-close" onclick="closeModal('approvalPreviewModal')">&times;</button></div>
+    <div class="modal-body" id="approvalPreviewBody" style="max-height:74vh;overflow-y:auto"></div>
+  </div>
+</div>
+
+<script src="../js/persist.js"></script>
+<script src="../js/upload.js"></script>
+<script src="../js/images.js"></script>
+<script src="../js/admin.js"></script>
+<script src="../js/security.js"></script>
+<script src="../js/modules.js"></script>
+<script src="../js/portals.js"></script>
+<script src="../js/timetable.js"></script>
+<script src="../js/approvals.js"></script>
+<script src="../js/inventory.js"></script>
+<script src="../js/reviewportals.js"></script>
+<script src="../js/performance.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>

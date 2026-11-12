@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Login | St. Teresa Academy Portals</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body data-page="login" class="login-page">
+
+  <main class="login-card">
+
+    <header class="login-brand">
+      <img class="login-crest" src="../images/favicon.svg" width="52" height="52" alt="St. Teresa Kanyange Academy crest">
+      <div class="login-brand-text">
+        <h1>St. Teresa Kanyange Academy</h1>
+        <p>Portal Login</p>
+      </div>
+    </header>
+
+    <div class="role-tabs" role="group" aria-label="Choose your portal">
+      <button type="button" class="role-tab active" data-role="admin" aria-pressed="true">
+        <i class="fas fa-user-shield" aria-hidden="true"></i> Admin
+      </button>
+      <button type="button" class="role-tab" data-role="headteacher" aria-pressed="false">
+        <i class="fas fa-school" aria-hidden="true"></i> Headteacher
+      </button>
+      <button type="button" class="role-tab" data-role="chiefexaminer" aria-pressed="false">
+        <i class="fas fa-user-tie" aria-hidden="true"></i> Chief Examiner
+      </button>
+      <button type="button" class="role-tab" data-role="secretary" aria-pressed="false">
+        <i class="fas fa-id-card" aria-hidden="true"></i> Secretary
+      </button>
+      <button type="button" class="role-tab" data-role="teacher" aria-pressed="false">
+        <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Teacher
+      </button>
+      <button type="button" class="role-tab" data-role="storekeeper" aria-pressed="false">
+        <i class="fas fa-warehouse" aria-hidden="true"></i> Stores
+      </button>
+      <button type="button" class="role-tab" data-role="kitchenmanager" aria-pressed="false">
+        <i class="fas fa-utensils" aria-hidden="true"></i> Kitchen
+      </button>
+      <button type="button" class="role-tab" data-role="student" aria-pressed="false">
+        <i class="fas fa-user-graduate" aria-hidden="true"></i> Student
+      </button>
+    </div>
+
+    <div class="login-error" id="loginError" role="alert"></div>
+
+    <form class="login-form" id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter username" autocomplete="username" autocapitalize="none"
+          spellcheck="false" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="login-btn"><i class="fas fa-right-to-bracket" aria-hidden="true"></i>&nbsp; Sign In</button>
+    </form>
+
+    <a href="../index.html" class="login-back"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to School Website</a>
+
+  </main>
+
+  <script src="../js/persist.js"></script>
+<script src="../js/admin.js"></script>
+  <script src="../js/security.js"></script>
+</body>
+</html>

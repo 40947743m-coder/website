@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Stores Portal | St. Teresa Academy</title>
+  <meta http-equiv="refresh" content="0; url=../store/dashboard.html">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .redirect-note { max-width: 520px; margin: 18vh auto 0; text-align: center; padding: 24px; }
+    .redirect-note i { font-size: 2.4rem; color: var(--gold); margin-bottom: 12px; }
+    .redirect-note p { color: var(--text-light); font-size: .92rem; margin: 8px 0 18px; }
+  </style>
+</head>
+<body data-page="uniformstaff">
+  <main class="redirect-note">
+    <i class="fas fa-shirt"></i>
+    <h2>The Uniform portal has moved</h2>
+    <p>Uniform stock is now managed from the <strong>Stores portal</strong> alongside every other item, so there is one stock account instead of several.</p>
+    <a class="btn btn-primary" href="../store/dashboard.html"><i class="fas fa-boxes-stacked"></i> Open the Stores portal</a>
+  </main>
+  <script>
+    /* Send legacy bookmarks on immediately; the link above covers no-JS. */
+    setTimeout(function () { window.location.replace('../store/dashboard.html'); }, 400);
+  </script>
+</body>
+</html>
